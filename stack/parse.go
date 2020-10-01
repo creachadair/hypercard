@@ -10,7 +10,7 @@ import (
 type Block struct {
 	Size uint32 // block size including size, type, and ID
 	Type string // type code, 4 bytes
-	ID   uint32 // block ID
+	ID   int32  // block ID
 	Data []byte
 }
 
@@ -30,7 +30,7 @@ func ParseOne(r io.Reader) (*Block, error) {
 	blk := &Block{
 		Size: binary.BigEndian.Uint32(header[:4]),
 		Type: string(header[4:8]),
-		ID:   binary.BigEndian.Uint32(header[8:12]),
+		ID:   int32(binary.BigEndian.Uint32(header[8:12])),
 	}
 	blk.Data = make([]byte, int(blk.Size)-len(header))
 	if nr, err := io.ReadFull(r, blk.Data); err != nil {

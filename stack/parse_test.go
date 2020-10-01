@@ -11,7 +11,7 @@ import (
 
 var testStack = flag.String("stack", "", "Path to .stk file to test")
 
-func TestParseONE(t *testing.T) {
+func TestParseOne(t *testing.T) {
 	if *testStack == "" {
 		t.Skip("Skipping test; no --stack path is given")
 	}
